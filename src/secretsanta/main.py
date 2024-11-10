@@ -4,13 +4,13 @@ import os
 import warnings
 from argparse import ArgumentParser
 
-from create_family_graph import create_family_graph
-from secret_santa_core import generate_authorized_digraph
+from .create_family_graph import create_family_graph
+from .secret_santa_core import generate_authorized_digraph
 
 
 def get_argument_parser():
     parser = ArgumentParser()
-    parser.add_argument("-i", "--input", type=str, help="Input file.")
+    parser.add_argument("-i", "--input", type=str, help="Input file. If JSON it has to have a 'family' list of list field encoding constraints, if GML it directly is the constraint graph.")
     parser.add_argument("-o", "--output", required=False, default=None, type=str, help="Output directory.")
     return parser
 
@@ -25,6 +25,9 @@ def pretty_print(solution: nx.DiGraph):
         print(f"{solution.nodes[node_index]['name']} -> {solution.nodes[neighbors[0]]['name']}")
 
 def secret_santa():
+    """
+    Script that runs the secret santa algorithm.
+    """
     args = get_argument_parser().parse_args()
 
     filename, extension = os.path.splitext(args.input)
@@ -51,7 +54,7 @@ def secret_santa():
     max_attempts = 10
     while attempt < max_attempts:
         try:
-            solution = generate_authorized_digraph(forbidden_graph=graph, max_steps=100)
+            solution = generate_authorized_digraph(constraint_graph=graph, max_steps=100)
             pretty_print(solution=solution)
             break
         except RuntimeError:

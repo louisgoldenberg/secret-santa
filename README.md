@@ -8,7 +8,7 @@ Simply run the program on a similar file:
 ```
 python3 -m venv .venv
 source .venv/bin/activate
-python -m pip install -r requirements.txt
+pip install -e .
 
-python src/secret-santa/main.py -i example.json
+secretsanta -i example.json
 ```

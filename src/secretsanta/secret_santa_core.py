@@ -7,9 +7,22 @@ def get_non_visited_nodes(graph: nx.DiGraph):
     return [node for node in graph.nodes if graph.in_degree(node) == 0]
 
 
-def generate_authorized_digraph(forbidden_graph: nx.Graph, max_steps: int = 1000):
-    """Generates a random authorized permutation."""
-    solution = nx.create_empty_copy(forbidden_graph).to_directed()
+def generate_authorized_digraph(constraint_graph: nx.Graph, max_steps: int = 1000):
+    """Generates a random authorized permutation.
+    
+    Parameters
+    ----------
+    constraint_graph : nx.Graph
+        Graph of constraints, i.e. forbidden edges in the solution.
+    max_steps : int
+        Maximum number of attempts for adding all edges.
+    
+    Returns
+    -------
+    solution : nx.DiGraph
+        Directed graph containing the secret santa assignment.
+    """
+    solution = nx.create_empty_copy(constraint_graph).to_directed()
 
     nodes = get_non_visited_nodes(solution)
     source = None
@@ -23,7 +36,7 @@ def generate_authorized_digraph(forbidden_graph: nx.Graph, max_steps: int = 1000
             # declare source but no new edge
             source = random_node
 
-        elif random_node != source and not forbidden_graph.has_edge(source, random_node):
+        elif random_node != source and not constraint_graph.has_edge(source, random_node):
             # declare new edge if not forbidden or 0-cycle
             solution.add_edge(source, random_node)
 

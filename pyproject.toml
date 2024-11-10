@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "secretsanta"
+description = "A simple secret-santa with constraints for your best family moments!"
+readme = "README.md"
+version = "0.1"
+
+requires-python = ">=3.10"
+
+dependencies = [
+  "networkx",
+]
+
+[project.scripts]
+secretsanta = "secretsanta.main:secret_santa"
+
