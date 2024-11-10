@@ -1,0 +1,19 @@
+{
+    "family": [
+        [
+            "Adult1a",
+            "Adult2a",
+            "Child1a",
+            "Child2a"
+        ],
+        [
+            "Adult1b",
+            "Adult2b",
+            "Child1c"
+        ],
+        [
+            "Adult1c",
+            "Adult2c"
+        ]
+    ]
+}
