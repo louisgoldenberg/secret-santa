@@ -196,3 +196,4 @@ pyrightconfig.json
 
 # Private data
 data/trocme*
+data/3ds*

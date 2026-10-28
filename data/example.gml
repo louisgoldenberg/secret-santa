@@ -32,7 +32,7 @@ graph [
   node [
     id 6
     label "6"
-    name "Child1c"
+    name "Child1b"
   ]
   node [
     id 7
