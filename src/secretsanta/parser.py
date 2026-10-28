@@ -17,4 +17,12 @@ def get_argument_parser():
         type=str,
         help="Output directory.",
     )
+    parser.add_argument(
+        "-m",
+        "--mail",
+        required=False,
+        default=None,
+        type=str,
+        help="The mail template.",
+    )
     return parser

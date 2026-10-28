@@ -1,4 +1,5 @@
 from .io import load_graph, pretty_print, save_matching_fig
+from .mail import parse_mail_config, send_all_mails, write_all_mails
 from .matching import (
     build_constraint_matrix,
     build_solution_digraph,
@@ -25,8 +26,16 @@ def secret_santa():
         constraint_graph=constraint_graph, matching=matching
     )
 
-    pretty_print(solution=solution)
-    save_matching_fig(constraint_matrix=constraint_matrix, matching=matching, args=args)
+    if args.mail is not None:
+        mail_config = parse_mail_config(mail_config_file=args.mail)
+        msg_list = write_all_mails(digraph=solution, mail_config=mail_config)
+        send_all_mails(msg_list=msg_list, mail_config=mail_config)
+
+    else:
+        pretty_print(solution=solution)
+        save_matching_fig(
+            constraint_matrix=constraint_matrix, matching=matching, args=args
+        )
 
 
 if __name__ == "__main__":
