@@ -28,6 +28,20 @@ def build_solution_digraph(
     return sol_graph
 
 
+def assert_validity(matching: np.ndarray, constraint_matrix: np.ndarray) -> None:
+    if (matching * constraint_matrix).sum() > 0:
+        msg = "Solution has non-zero cost. Problem is infeasible"
+        raise FeasibilityError(msg)
+
+    if not np.array_equal(matching.sum(axis=0), np.ones_like(matching[0])):
+        msg = "Incorrect first marginal!"
+        raise RuntimeError(msg)
+
+    if not np.array_equal(matching.sum(axis=1), np.ones_like(matching[:, 0])):
+        msg = "Incorrect second marginal!"
+        raise RuntimeError(msg)
+
+
 def draw_new_edge(
     current_index: int, current_matching: np.ndarray, constraint_matrix: np.ndarray
 ) -> np.ndarray:
@@ -83,11 +97,14 @@ def draw_valid_matching(constraint_matrix: np.ndarray) -> np.ndarray:
     """Draws a random valid matching for the given constraint matrix."""
 
     try:
-        return draw_new_edge(
+        matching = draw_new_edge(
             current_index=0,
             current_matching=np.zeros_like(constraint_matrix),
             constraint_matrix=constraint_matrix,
         )
+        assert_validity(matching=matching, constraint_matrix=constraint_matrix)
+        return matching
+
     except FeasibilityError:
         msg = "Failed to find a valid solution in the recursion. Problem is infeasible."
         raise FeasibilityError(msg)
