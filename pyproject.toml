@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "secretsanta"
 description = "A simple secret-santa with constraints for your best family moments!"
 readme = "README.md"
-version = "0.2"
+version = "0.3"
 
 requires-python = ">=3.10"
 
