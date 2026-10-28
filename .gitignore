@@ -197,3 +197,6 @@ pyrightconfig.json
 # Private data
 data/trocme*
 data/3ds*
+data/tmp*
+data/*-mail-config.json
+data/*.png
