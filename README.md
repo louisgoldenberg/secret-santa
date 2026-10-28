@@ -14,7 +14,7 @@ pip install -e .
 ```
 Then simply run the program on a file (following one of the examples):
 ```
-secretsanta -i example.json
+secretsanta -i data/example.json
 ```
 
 If you provide a JSON, it has to have a 'family' field, which is a list of list. Each sublist is a constraint clique (e.g. your own family, then your brother's, ...) and no matter the names, they will be considered as different persons. 
