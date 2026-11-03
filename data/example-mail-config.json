@@ -1,0 +1,6 @@
+{
+	"global-sender": "santa@mail.com",
+	"mail-template": "./data/email-template.txt",
+	"username": "santa@mail.com",
+	"password": "xxxxxxxxxxxxxxxx"
+}

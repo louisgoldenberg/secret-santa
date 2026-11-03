@@ -1,0 +1,13 @@
+Salut {{sender_first_name}},
+
+Noël approche, et comme tu le sais, cette année nous avons décidé de faire un secret santa.
+Le tirage au sort officiel a eu lieu, et tu dois offrir un cadeau à {{receiver_name}}.
+
+Voici un résumé des règles qui ont été fixées par sondage :
+	- Les cadeaux peuvent être soit faits à la main (do it yourself), soit achetés avec un budget de 25€ maximum. C'est un maximum, donc tu n'es pas obligé·e de l'atteindre, pas de pression.
+	- Nous nous offrirons ces cadeaux lors d'un repas le XXX. Afin d'avoir un maximum de présence, bloque la date tout de suite dans ton calendrier ! Je ferai suivre une invitation avec quelques détails supplémentaires très bientôt. 
+
+Ne réponds pas à cet e-mail, sinon je verrai à qui tu dois offrir un cadeau !
+Pour toute question, viens me voir ou écris moi à santa@mail.com.
+
+(Secret) Santa
