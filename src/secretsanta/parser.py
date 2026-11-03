@@ -25,4 +25,10 @@ def get_argument_parser():
         type=str,
         help="The mail template.",
     )
+    parser.add_argument(
+        "-v",
+        "--verbose",
+        action="store_true",
+        help="Prints validity checks.",
+    )
     return parser

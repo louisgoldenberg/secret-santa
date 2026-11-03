@@ -28,10 +28,23 @@ def build_solution_digraph(
     return sol_graph
 
 
-def assert_validity(matching: np.ndarray, constraint_matrix: np.ndarray) -> None:
+def assert_validity(
+    matching: np.ndarray,
+    constraint_matrix: np.ndarray,
+    verbose: bool = True,
+) -> None:
+
+    if verbose:
+        print(f"Ensuring zero cost: cost is {(matching * constraint_matrix).sum()}")
+
     if (matching * constraint_matrix).sum() > 0:
         msg = "Solution has non-zero cost. Problem is infeasible"
         raise FeasibilityError(msg)
+
+    if verbose:
+        print("Analyzing marginals:")
+        print("\tFirst marginal:", matching.sum(axis=0))
+        print("\tSecond marginal:", matching.sum(axis=1))
 
     if not np.array_equal(matching.sum(axis=0), np.ones_like(matching[0])):
         msg = "Incorrect first marginal!"
@@ -39,6 +52,14 @@ def assert_validity(matching: np.ndarray, constraint_matrix: np.ndarray) -> None
 
     if not np.array_equal(matching.sum(axis=1), np.ones_like(matching[:, 0])):
         msg = "Incorrect second marginal!"
+        raise RuntimeError(msg)
+
+    if verbose:
+        print("Analyzing diagonal:")
+        print("\tMain diagonal:", matching.diagonal())
+
+    if not np.array_equal(matching.diagonal(), np.zeros_like(matching[0])):
+        msg = "Incorrect main diagonal!"
         raise RuntimeError(msg)
 
 
@@ -93,7 +114,9 @@ def draw_new_edge(
     raise FeasibilityError(msg)
 
 
-def draw_valid_matching(constraint_matrix: np.ndarray) -> np.ndarray:
+def draw_valid_matching(
+    constraint_matrix: np.ndarray, verbose: bool = False
+) -> np.ndarray:
     """Draws a random valid matching for the given constraint matrix."""
 
     try:
@@ -102,7 +125,9 @@ def draw_valid_matching(constraint_matrix: np.ndarray) -> np.ndarray:
             current_matching=np.zeros_like(constraint_matrix),
             constraint_matrix=constraint_matrix,
         )
-        assert_validity(matching=matching, constraint_matrix=constraint_matrix)
+        assert_validity(
+            matching=matching, constraint_matrix=constraint_matrix, verbose=verbose
+        )
         return matching
 
     except FeasibilityError:

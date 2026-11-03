@@ -21,7 +21,9 @@ def secret_santa():
     #     print(graph.nodes[node])
 
     constraint_matrix = build_constraint_matrix(constraint_graph=constraint_graph)
-    matching = draw_valid_matching(constraint_matrix=constraint_matrix)
+    matching = draw_valid_matching(
+        constraint_matrix=constraint_matrix, verbose=args.verbose
+    )
     solution = build_solution_digraph(
         constraint_graph=constraint_graph, matching=matching
     )
